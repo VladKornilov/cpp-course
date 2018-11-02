@@ -3,14 +3,16 @@
 
 #include <cstddef>
 #include <iosfwd>
-#include "vector.h"
+#include <vector>
+#include <cstdint>
+//#include "vector.h"
 
 struct big_integer
 {
 
     big_integer();
     big_integer(big_integer const& other);
-    big_integer(long long a);
+    big_integer(int64_t a);
     explicit big_integer(std::string const& str);
     ~big_integer();
 
@@ -49,20 +51,20 @@ struct big_integer
     friend std::string to_string(big_integer const& a);
 
 private:
-    Vector digits;
+    std::vector<uint32_t> digits;
     int sign;
-    unsigned int &operator[](int const& index);
-    const unsigned int operator[](int const& index) const;
+    uint32_t &operator[](int const& index);
+    const uint32_t operator[](int const& index) const;
     big_integer abs(big_integer const& a);
     big_integer add_abs(big_integer const& a, big_integer const& b);
     big_integer sub_abs(big_integer const& a, big_integer const& b);
     big_integer mul_abs(big_integer const& a, big_integer const& b);
-    big_integer mul_short_abs(big_integer const& a, unsigned int b);
-    bool cmp_prefix(big_integer const &r, big_integer const &d, unsigned int k, unsigned int m);
+    big_integer mul_short_abs(big_integer const& a, uint32_t b);
+    bool cmp_prefix(big_integer const &r, big_integer const &d, uint32_t k, uint32_t m);
     std::pair<big_integer, big_integer> div_abs(big_integer const& a, big_integer const& b);
-    std::pair<big_integer, unsigned int> div_short_abs(big_integer const &a, unsigned int b);
+    std::pair<big_integer, uint32_t> div_short_abs(big_integer const &a, uint32_t b);
     big_integer bitwise(big_integer a, big_integer b, char op);
-    static unsigned int cast_to_uint(big_integer const& a);
+    static uint32_t cast_to_uint(big_integer const& a);
     void shorten(big_integer &a);
 
 };
