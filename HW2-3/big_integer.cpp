@@ -301,7 +301,7 @@ bool operator<(big_integer const& a, big_integer const& b)
 {
     if (a.sign != b.sign) return a.sign < b.sign;
     if (a.digits.size() != b.digits.size()) {
-        return a.sign * (a.digits.size() - b.digits.size()) < 0;
+        return a.sign * ((int)a.digits.size() - (int)b.digits.size()) < 0;
     }
 
     for (size_t i = a.digits.size() - 1; i < a.digits.size(); i--) {
